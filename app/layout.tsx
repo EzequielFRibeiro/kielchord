@@ -1,42 +1,54 @@
-import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans, JetBrains_Mono } from 'next/font/google'
-import './globals.css'
+import type { Metadata, Viewport } from 'next';
+import { Poppins } from 'next/font/google';
+import './globals.css';
 
-const displayFont = Playfair_Display({
+const poppins = Poppins({
+  weight: ['400', '600'],
   subsets: ['latin'],
-  variable: '--font-display',
+  variable: '--font-poppins',
   display: 'swap',
-})
-
-const bodyFont = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-})
-
-const monoFont = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-})
+});
 
 export const metadata: Metadata = {
-  title: 'ChordLens — AI Chord Detection',
-  description: 'Detect chords, beats, and key from any song using AI. Supports file upload, microphone, and YouTube URLs.',
-  keywords: 'chord detection, music analysis, AI, guitar chords, beat tracking, key detection',
+  title: {
+    default: 'App Deco Studio · Making apps simple, yet stunning.',
+    template: '%s · App Deco Studio',
+  },
+  description:
+    'App Deco Studio crafts beautiful, intuitive apps for Apple platforms. Explore Söka, Classifier, and Ceramispace.',
+  metadataBase: new URL('https://appdeco.ca'),
   openGraph: {
-    title: 'ChordLens — AI Chord Detection',
-    description: 'Detect chords, beats, and key from any song',
+    title: 'App Deco Studio',
+    description: 'Making apps simple, yet stunning.',
+    url: 'https://appdeco.ca',
+    siteName: 'App Deco Studio',
+    images: [{ url: '/images/preview-image.png', width: 1200, height: 630 }],
     type: 'website',
   },
-}
+  twitter: {
+    card: 'summary_large_image',
+    title: 'App Deco Studio',
+    description: 'Making apps simple, yet stunning.',
+    images: ['/images/preview-image.png'],
+  },
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
+};
+
+export const viewport: Viewport = {
+  themeColor: '#15130e',
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
-      <body className="font-body antialiased bg-obsidian-950 text-slate-100">
-        {children}
-      </body>
+    <html lang="en">
+      <body className={`${poppins.variable} antialiased`}>{children}</body>
     </html>
-  )
+  );
 }
